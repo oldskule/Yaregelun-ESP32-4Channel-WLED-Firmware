@@ -1,8 +1,9 @@
 # ESP32-32E MOSFET Board -- WLED Build
 
 This repository contains prebuilt firmware binaries for the ESP32-32E
-4MB Flash MOSFET board (Amazon ASIN: B0G1MM9HNG).
-https://www.amazon.com/dp/B0G1MM9HNG/?coliid=I3GJGLNX9ZJUSO&colid=1NQROFCKO0AS6&psc=1&ref_=cm_sw_r_cp_ud_lstpd_RMCX8AFVJWH0D3Q0ZEK2
+4MB Flash MOSFET board 
+
+[Amazon ASIN: B0G1MM9HNG](https://a.co/d/03ojZ7y5)
 
 Board characteristics:
 
@@ -121,7 +122,7 @@ ground with USB-TTL adapter
 
 # Build Info
 
-Firmware compiled using PlatformIO with:
+Firmware compiled using PlatformIO with, Flashed with esptool using [Amazon ASIN: B078W5L8W1](https://a.co/d/06iSxmx3)
 
 -   Custom partition table (dual OTA, SPIFFS)
 -   Flash mode: DOUT
