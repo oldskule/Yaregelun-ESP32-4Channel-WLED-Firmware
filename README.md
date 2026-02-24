@@ -191,8 +191,10 @@ Tested with USB-TTL adapter (example: Amazon ASIN B078W5L8W1)
 
 ------------------------------------------------------------------------
 
-If this firmware works for you, consider documenting:
+GPIO PINS
 
--   GPIO mapping for MOSFET outputs
--   LED configuration used
--   Any hardware modifications
+16 --> CHANNEL1
+17 --> CHANNEL2
+26 --> CHANNEL3
+27 --> CHANNEL4
+
