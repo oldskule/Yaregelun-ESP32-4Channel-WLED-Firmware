@@ -1,0 +1,137 @@
+# ESP32-32E MOSFET Board -- WLED Build
+
+This repository contains prebuilt firmware binaries for the ESP32-32E
+4MB Flash MOSFET board (Amazon ASIN: B0G1MM9HNG).
+https://www.amazon.com/dp/B0G1MM9HNG/?coliid=I3GJGLNX9ZJUSO&colid=1NQROFCKO0AS6&psc=1&ref_=cm_sw_r_cp_ud_lstpd_RMCX8AFVJWH0D3Q0ZEK2
+
+Board characteristics:
+
+-   ESP32-32E
+-   4MB Flash
+-   Dual OTA layout
+-   SPIFFS filesystem
+-   Flash mode: **DOUT**
+-   Flash frequency: **40MHz**
+
+Firmware layout:
+
+  Address   File
+  --------- ----------------
+  0x1000    bootloader.bin
+  0x8000    partitions.bin
+  0x10000   firmware.bin
+
+------------------------------------------------------------------------
+
+# Requirements
+
+-   macOS / Linux / Windows
+-   Python 3
+-   `esptool` installed:
+
+``` bash
+pip3 install esptool
+```
+
+-   USB-TTL adapter connected to:
+    -   TX → RX
+    -   RX → TX
+    -   GND → GND
+-   Board powered from 12V supply (recommended)
+-   Shared ground between adapter and board
+
+------------------------------------------------------------------------
+
+# Enter Flash Mode
+
+1.  Short IO0 → GND\
+2.  Apply power\
+3.  Remove IO0 short after connection
+
+------------------------------------------------------------------------
+
+# FLASH
+
+``` bash
+esptool --chip esp32 --port /dev/cu.usbserial-0001 --baud 460800 write-flash -z   --flash-mode dout --flash-freq 40m --flash-size 4MB   0x1000  bootloader.bin   0x8000  partitions.bin   0x10000 firmware.bin
+```
+
+After flashing completes:
+
+-   Remove IO0 short (if used)
+-   Power cycle the board
+
+------------------------------------------------------------------------
+
+# WIPE (Full Chip Erase)
+
+``` bash
+esptool --chip esp32 --port /dev/cu.usbserial-0001 erase-flash
+```
+
+------------------------------------------------------------------------
+
+# Reset WiFi Settings Only (Clear NVS)
+
+``` bash
+esptool --chip esp32 --port /dev/cu.usbserial-0001 erase-region 0x9000 0x5000
+```
+
+This restores WLED AP mode.
+
+------------------------------------------------------------------------
+
+# Serial Monitor
+
+``` bash
+screen /dev/cu.usbserial-0001 115200
+```
+
+Exit screen:
+
+    Ctrl + A, then K, then Y
+
+------------------------------------------------------------------------
+
+# Notes
+
+-   ESP32 supports **2.4GHz WiFi only**
+-   WPA3-only networks may fail
+-   Recommended router security: WPA2
+-   If WiFi fails after configuration, clear NVS and retry
+
+------------------------------------------------------------------------
+
+# Troubleshooting
+
+### Boot loop / invalid header
+
+Ensure firmware is flashed at `0x10000` (not `0x0`).
+
+### Filesystem errors
+
+Ensure partitions.bin matches firmware build.
+
+### No AP after wipe
+
+Verify: - Correct flash mode (`dout`) - Stable 12V supply - Shared
+ground with USB-TTL adapter
+
+------------------------------------------------------------------------
+
+# Build Info
+
+Firmware compiled using PlatformIO with:
+
+-   Custom partition table (dual OTA, SPIFFS)
+-   Flash mode: DOUT
+-   Flash freq: 40MHz
+-   Flash size: 4MB
+
+------------------------------------------------------------------------
+
+If this firmware works for you, consider documenting:
+
+-   GPIO mapping for MOSFET outputs
+-   LED configuration used
+-   Any hardware modifications
