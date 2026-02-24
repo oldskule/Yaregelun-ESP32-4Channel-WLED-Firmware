@@ -1,17 +1,17 @@
 # ESP32-32E MOSFET Board -- WLED Build
 
 This repository contains prebuilt firmware binaries for the ESP32-32E
-4MB Flash MOSFET board 
+4MB Flash MOSFET board.
 
-[Amazon ASIN: B0G1MM9HNG](https://a.co/d/03ojZ7y5)
+[Amazon ASIN: B078W5L8W1](https://a.co/d/06iSxmx3)
 
 Board characteristics:
 
--   ESP32-32E
--   4MB Flash
--   Dual OTA layout
--   SPIFFS filesystem
--   Flash mode: **DOUT**
+-   ESP32-32E\
+-   4MB Flash\
+-   Dual OTA layout\
+-   SPIFFS filesystem\
+-   Flash mode: **DOUT**\
 -   Flash frequency: **40MHz**
 
 Firmware layout:
@@ -26,8 +26,8 @@ Firmware layout:
 
 # Requirements
 
--   macOS / Linux / Windows
--   Python 3
+-   macOS / Linux / Windows\
+-   Python 3\
 -   `esptool` installed:
 
 ``` bash
@@ -35,11 +35,62 @@ pip3 install esptool
 ```
 
 -   USB-TTL adapter connected to:
-    -   TX → RX
-    -   RX → TX
-    -   GND → GND
--   Board powered from 12V supply (recommended)
+    -   TX → RX\
+    -   RX → TX\
+    -   GND → GND\
+-   Board powered from 12V supply (recommended)\
 -   Shared ground between adapter and board
+
+------------------------------------------------------------------------
+
+# IMPORTANT: Finding Your Serial Port
+
+The board does not have a USB-To-Serial or similar UART chip so a USB-TTL adapter in required:
+
+[Amazon ASIN: B0G1MM9HNG](https://a.co/d/03ojZ7y5)
+
+In all commands below, `/dev/cu.usbserial-0001` is an example.
+
+You MUST replace it with the correct port name for your system.
+
+## macOS
+
+Unplug adapter, then run:
+
+``` bash
+ls /dev/cu.*
+```
+
+Plug adapter back in and run again:
+
+``` bash
+ls /dev/cu.*
+```
+
+The new entry is your port (example: `/dev/cu.usbserial-110`).
+
+## Linux
+
+``` bash
+ls /dev/ttyUSB*
+ls /dev/ttyACM*
+```
+
+Usually something like:
+
+    /dev/ttyUSB0
+
+## Windows
+
+Open Device Manager → Ports (COM & LPT)
+
+Look for:
+
+    USB Serial Device (COM3)
+
+Use:
+
+    --port COM3
 
 ------------------------------------------------------------------------
 
@@ -52,6 +103,8 @@ pip3 install esptool
 ------------------------------------------------------------------------
 
 # FLASH
+
+Replace the port name before running.
 
 ``` bash
 esptool --chip esp32 --port /dev/cu.usbserial-0001 --baud 460800 write-flash -z   --flash-mode dout --flash-freq 40m --flash-size 4MB   0x1000  bootloader.bin   0x8000  partitions.bin   0x10000 firmware.bin
@@ -94,12 +147,17 @@ Exit screen:
 
 ------------------------------------------------------------------------
 
-# Notes
+# Things You May Need To Change
 
--   ESP32 supports **2.4GHz WiFi only**
--   WPA3-only networks may fail
--   Recommended router security: WPA2
--   If WiFi fails after configuration, clear NVS and retry
+-   Replace `/dev/cu.usbserial-0001` with your actual port.
+-   If flashing fails, lower baud rate to `115200`.
+-   If WiFi fails to connect:
+    -   Use 2.4GHz only
+    -   Disable WPA3-only
+    -   Try a simple SSID (no spaces/special characters)
+-   If board resets during WiFi:
+    -   Use stable 12V supply
+    -   Verify solid ground connection
 
 ------------------------------------------------------------------------
 
@@ -122,7 +180,9 @@ ground with USB-TTL adapter
 
 # Build Info
 
-Firmware compiled using PlatformIO with, Flashed with esptool using [Amazon ASIN: B078W5L8W1](https://a.co/d/06iSxmx3)
+Firmware compiled using PlatformIO\
+Flashed with esptool\
+Tested with USB-TTL adapter (example: Amazon ASIN B078W5L8W1)
 
 -   Custom partition table (dual OTA, SPIFFS)
 -   Flash mode: DOUT
