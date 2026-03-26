@@ -180,14 +180,20 @@ ground with USB-TTL adapter
 
 # Build Info
 
+**Latest Build: March 25, 2026**
+
 Firmware compiled using PlatformIO\
-Flashed with esptool\
+Based on WLED main branch (commit d8cb20a9, March 24 2026)\
+Version: WLED 16.0.0-alpha\
 Tested with USB-TTL adapter (example: Amazon ASIN B078W5L8W1)
 
 -   Custom partition table (dual OTA, SPIFFS)
 -   Flash mode: DOUT
 -   Flash freq: 40MHz
 -   Flash size: 4MB
+-   Memory: Flash 81.8% / RAM 24.9%
+
+For detailed changelog, see [CHANGELOG.md](CHANGELOG.md)
 
 ------------------------------------------------------------------------
 
