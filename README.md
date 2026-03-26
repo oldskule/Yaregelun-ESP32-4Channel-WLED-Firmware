@@ -43,6 +43,48 @@ pip3 install esptool
 
 ------------------------------------------------------------------------
 
+# OTA UPDATE (Recommended - No USB Adapter Needed!)
+
+Once your device is initially flashed, you can update firmware **over-the-air** through the WLED web interface. This is much easier than using the USB-TTL adapter!
+
+## What You Need for OTA
+- **Only `firmware.bin`** (the other files are already on your device)
+- Device connected to your WiFi network
+- Access to WLED web interface
+
+## How to OTA Update
+
+1. **Find your device IP:**
+   - Check your router's connected devices
+   - Or connect to WLED's AP mode (if WiFi setup fails):
+     - Network: `WLED-AP`
+     - Password: `wled1234`
+     - Device IP: `192.168.4.1`
+
+2. **Open WLED web interface:**
+   - Browser: `http://<device-ip>`
+
+3. **Navigate to Update:**
+   - Go to **Settings** → **Update**
+
+4. **Upload firmware:**
+   - Click "Choose File" and select `firmware.bin`
+   - Click "Update" and wait (~30-60 seconds)
+   - Device will automatically reboot with new firmware
+
+## Why OTA Works
+- **Dual OTA partitions** - Safe updates with automatic fallback
+- **No USB adapter needed** - Updates over WiFi
+- **Preserves settings** - Configuration stays intact
+- **Fast and reliable** - Built into WLED core functionality
+
+## When You Still Need USB-TTL
+- **Initial flash** (first time setup)
+- **Bootloader/partition changes** (rare)
+- **Recovery** (if OTA fails and device won't boot)
+
+------------------------------------------------------------------------
+
 # IMPORTANT: Finding Your Serial Port
 
 The board does not have a USB-To-Serial or similar UART chip so a USB-TTL adapter in required:
