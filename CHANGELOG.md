@@ -2,7 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
-## [March 25, 2026]
+## [March 25, 2026] - Pre-configured LED Outputs
+
+### Added
+- **Pre-configured LED outputs** - Firmware now ships with 4 PWM white channels pre-configured:
+  - LED Output 1: GPIO 16 (PWM White)
+  - LED Output 2: GPIO 17 (PWM White)
+  - LED Output 3: GPIO 26 (PWM White)
+  - LED Output 4: GPIO 27 (PWM White)
+- **Build flags added**:
+  - `-D DATA_PINS=16,17,26,27`
+  - `-D LED_TYPES=TYPE_ANALOG_1CH,TYPE_ANALOG_1CH,TYPE_ANALOG_1CH,TYPE_ANALOG_1CH`
+  - `-D PIXEL_COUNTS=1,1,1,1`
 
 ### Updated
 - **WLED Base**: Updated to latest main branch from WLED-dev/WLED (commit d8cb20a9, March 24 2026)
@@ -27,6 +38,7 @@ All notable changes to this project will be documented in this file.
   - 4MB Flash
   - Flash Mode: DOUT @ 40MHz
   - Custom Partition Table
+  - **Pre-configured 4-channel PWM white outputs**
 
 ---
 

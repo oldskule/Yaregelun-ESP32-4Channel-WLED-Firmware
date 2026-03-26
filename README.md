@@ -13,6 +13,20 @@ Board characteristics:
 -   SPIFFS filesystem\
 -   Flash mode: **DOUT**\
 -   Flash frequency: **40MHz**
+-   **Pre-configured LED outputs**: 4 PWM white channels (GPIOs 16, 17, 26, 27)
+
+## Pre-configured LED Outputs
+
+This firmware comes pre-configured with 4 PWM white LED outputs, ready to use with your 4-channel MOSFET board:
+
+| Output | GPIO Pin | Type       | Description |
+|--------|----------|------------|-------------|
+| 1      | 16       | PWM White  | Channel 1   |
+| 2      | 17       | PWM White  | Channel 2   |
+| 3      | 26       | PWM White  | Channel 3   |
+| 4      | 27       | PWM White  | Channel 4   |
+
+**No configuration needed!** After flashing, your LED outputs will be immediately available in the WLED web interface.
 
 Firmware layout:
 
